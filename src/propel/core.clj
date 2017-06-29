@@ -277,7 +277,7 @@
 
 (defn -main
   "Runs propel-gp, giving it a map of arguments."
-  []
+  [& args]
   (propel-gp {:instructions instructions
               :error-function regression-error-function
               :max-generations 500
