@@ -1,4 +1,4 @@
-(defproject propel "0.1.0-SNAPSHOT"
+(defproject propel "0.1.0"
   :description "Tom Helmuth's small Push implementation in Clojure."
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
