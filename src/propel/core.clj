@@ -29,6 +29,7 @@
   {:exec '()
    :integer '()
    :string '()
+   :boolean '()
    :input {}})
 
 (defn abs
@@ -74,10 +75,10 @@
   aren't enough args on the stacks, returns :not-enough-args."
   [state stacks]
   (loop [state state
-         stacks stacks
+         stacks (reverse stacks)
          args '()]
     (if (empty? stacks)
-      {:state state :args (reverse args)}
+      {:state state :args args}
       (let [stack (first stacks)]
         (if (empty-stack? state stack)
           :not-enough-args
@@ -94,7 +95,7 @@
   (let [args-pop-result (get-args-from-stacks state arg-stacks)]
     (if (= args-pop-result :not-enough-args)
       state
-      (let [result (apply function (reverse (:args args-pop-result)))
+      (let [result (apply function (:args args-pop-result))
             new-state (:state args-pop-result)]
         (push-to-stack new-state return-stack result)))))
 
@@ -244,12 +245,19 @@
 ;;;;;;;;;
 ;; Problem: f(x) = 7x^2 - 20x + 13
 
-(defn target-function
+(defn target-function-hard
   "Target function: f(x) = 7x^2 - 20x + 13"
   [x]
   (+ (* 7 x x)
      (* -20 x)
      13))
+
+(defn target-function
+  "Target function: f(x) = x^3 + x + 3"
+  [x]
+  (+ (* x x x)
+     x
+     3))
 
 (defn regression-error-function
   "Finds the behaviors and errors of the individual."
