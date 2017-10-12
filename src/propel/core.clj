@@ -286,8 +286,9 @@
 (defn -main
   "Runs propel-gp, giving it a map of arguments."
   [& args]
-  (propel-gp {:instructions instructions
-              :error-function regression-error-function
-              :max-generations 500
-              :population-size 200
-              :max-initial-program-size 50}))
+  (binding [*ns* (the-ns 'propel.core)]
+    (propel-gp {:instructions instructions
+                :error-function regression-error-function
+                :max-generations 500
+                :population-size 200
+                :max-initial-program-size 50})))
